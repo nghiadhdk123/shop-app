@@ -1,0 +1,45 @@
+.admin-page {
+
+    .button-add-product {
+        background-color: var(--color-4);
+
+        &:hover {
+            background-color: #0898d9;
+        }
+    }
+
+    table {
+        border: 1px solid #dee2e6;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+
+        th, td {
+            padding: 0.75rem;
+            border: 1px solid #dee2e6;
+            text-align: center;
+        }
+
+        th {
+            background-color: var(--color-4);
+            color: white;
+            
+            &:first-child {
+                border-top-left-radius: 5px;
+            }
+
+            &:last-child {
+                border-top-right-radius: 5px;
+            }
+        }
+    }
+
+    .preview-image {
+        width: 150px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px dashed black;
+        cursor: pointer;
+    }
+}

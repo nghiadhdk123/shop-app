@@ -1,0 +1,68 @@
+footer {
+    background-color: var(--color-3);
+
+    .footer-wrapper {
+
+        .footer-left {
+
+            &__logo {
+
+                img {
+                    width: 70px;
+                    height: 70px;
+                }
+            }
+
+            &__subscrice {
+
+                form {
+
+                    input {
+                        width: 100%;
+                        padding: 11px 20px;
+                        border: 1px solid var(--color-1);
+                        border-right: unset;
+                        outline: none;
+                        border-radius: 5px 0 0 5px;
+                        font-size: 14px;
+
+                        &:focus {
+                            box-shadow: 0px 0px 2px var(--color-1)
+                        }
+                    }
+
+                    button {
+                        padding: 11px;
+                        border: 1px solid var(--color-1);
+                        background-color: var(--color-1);
+                        color: white;
+                        font-weight: 500;
+                        border-radius: 0 5px 5px 0;
+                        transition: 0.3s;
+
+                        &:hover {
+                            background-color: white;
+                            color: var(--color-1);
+                        }
+                    }
+                }
+            }
+        }
+
+        .footer-middle {
+
+            &__menu {
+
+                .menu-item {
+
+                    .item {
+
+                        &-link {
+                           color: black;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
