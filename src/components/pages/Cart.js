@@ -1,13 +1,11 @@
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../context/CartContext";
 import { formatMoney } from "../../until/helper";
 import "../../scss/cart.scss";
 
 function Cart() {
-
-    const [cart, setCart] = useState(() => {
-        return JSON.parse(localStorage.getItem('cart')) ?? [];
-    });
+    const { cart, handleDecrease, handleIncrease, handleDeleteCart, handleDestroyCart } = useContext(CartContext);
 
     const totalMoney = useMemo(() => {
         const result = cart.reduce((total, item) => {
@@ -15,7 +13,7 @@ function Cart() {
         }, 0);
 
         return result;
-    }, [])
+    }, [cart])
 
     const totalQty = useMemo(() => {
         const result = cart.reduce((total, item) => {
@@ -23,7 +21,7 @@ function Cart() {
         }, 0);
 
         return result;
-    }, [])
+    }, [cart])
 
     return (
         <div className="cart-page">
@@ -54,42 +52,63 @@ function Cart() {
                                     <th className="text-center">Giá</th>
                                     <th className="text-center">Số lượng</th>
                                     <th className="text-center">Tổng tiền</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    cart.length > 0 ? 
-                                    (
-                                        cart.map(value => (
-                                            <tr key={value._id}>
-                                                <td className="align-middle text-center">
-                                                    <img src={ value.image ? process.env.REACT_APP_API_URL + '/uploads/' + value.image : '/images/not-find-it.png' } alt="" width="50" height="50" className="object-fit-cover"/>
-                                                </td>
-                                                <td className="align-middle text-center">
-                                                    { value.name }
-                                                </td>
-                                                <td className="align-middle text-center">
-                                                    { formatMoney(value.price) } đ
-                                                </td>
-                                                <td className="align-middle text-center">
-                                                    { value.qty }
-                                                </td>
-                                                <td className="align-middle text-center">
-                                                    { formatMoney(value.qty * value.price) } đ
+                                    cart.length > 0 ?
+                                        (
+                                            cart.map(value => (
+                                                <tr key={value._id}>
+                                                    <td className="align-middle text-center">
+                                                        <img src={value.image ? process.env.REACT_APP_API_URL + '/uploads/' + value.image : '/images/not-find-it.png'} alt="" width="50" height="50" className="object-fit-cover" />
+                                                    </td>
+                                                    <td className="align-middle text-center">
+                                                        {value.name}
+                                                    </td>
+                                                    <td className="align-middle text-center">
+                                                        {formatMoney(value.price)} đ
+                                                    </td>
+                                                    <td className="align-middle text-center">
+                                                        <div className="cart-qty d-flex justify-content-between align-items-center">
+                                                            <button className="btn-decrease btn" onClick={() => handleDecrease(value._id)}> - </button>
+                                                            {value.qty}
+                                                            <button className="btn-increase btn" onClick={() => handleIncrease(value._id)}> + </button>
+                                                        </div>
+                                                    </td>
+                                                    <td className="align-middle text-center">
+                                                        {formatMoney(value.qty * value.price)} đ
+                                                    </td>
+                                                    <td>
+                                                        <button className="btn btn-danger" onClick={() => handleDeleteCart(value._id)}>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash" viewBox="0 0 16 16">
+                                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z" />
+                                                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
+                                                            </svg>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        ) :
+                                        (
+                                            <tr>
+                                                <td colSpan="5" className="text-center">
+                                                    <img src="/images/no-data.png" alt="No Data" width="100" height="100" />
+                                                    <span className="d-block text-center mt-4 py-2 fw-bold fst-italic">Bạn chưa có sản phẩm nào trong giỏ hàng. <Link to="/">Mua hàng</Link></span>
                                                 </td>
                                             </tr>
-                                        ))
-                                    ) :
-                                    (
-                                        <tr>
-                                            <td colSpan="5" className="text-center">
-                                                <img src="/images/no-data.png" alt="No Data" width="100" height="100" />
-                                                <span className="d-block text-center mt-4 py-2 fw-bold fst-italic">Bạn chưa có sản phẩm nào trong giỏ hàng.</span>
-                                            </td>
-                                        </tr>
-                                    )
-
+                                        )
                                 }
+                                {cart.length > 0 && (
+                                    <tr>
+                                        <td colSpan={6} align="right">
+                                            <button className="btn btn-primary" onClick={handleDestroyCart}>
+                                                Xóa tất cả
+                                            </button>
+                                        </td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>
@@ -97,13 +116,13 @@ function Cart() {
                         <div className="cart-summary px-4 py-3">
                             <h5 className="fw-bold">Tổng hóa đơn</h5>
                             <div className="cart-summary__qty d-flex justify-content-between w-100 my-2">
-                                <span>Số lượng: </span> <span>{ totalQty }</span>
+                                <span>Số lượng: </span> <span>{totalQty}</span>
                             </div>
                             <div className="cart-summary__ship d-flex justify-content-between w-100">
                                 <span>Vận chuyển: </span> <span>Free</span>
                             </div>
                             <div className="cart-summary__total d-flex justify-content-between w-100 mt-3 fw-bold fs-6">
-                                <span>Thành tiền: </span> <span>{ formatMoney(totalMoney) } đ</span>
+                                <span>Thành tiền: </span> <span>{formatMoney(totalMoney)} đ</span>
                             </div>
                         </div>
                     </div>

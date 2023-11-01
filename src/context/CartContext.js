@@ -50,6 +50,62 @@ function CartProvider({ children }) {
         });
     }
 
+    const handleDecrease = (productId) => {
+        setCart((preCart) => {
+            let newCart = [...preCart];
+            
+            for (let i = 0; i < cart.length; i++) {
+                if(newCart[i]._id === productId) {
+                    newCart[i].qty--;
+                    if(newCart[i].qty <= 0) {
+                        newCart.splice(i, 1);
+                        break;
+                    }
+                }
+            }
+            localStorage.setItem('cart', JSON.stringify(newCart));
+
+            return newCart;
+        });
+    }
+
+    const handleIncrease = (productId) => {
+        setCart((preCart) => {
+            let newCart = [...preCart];
+            
+            for (let i = 0; i < cart.length; i++) {
+                if(newCart[i]._id === productId) {
+                   newCart[i].qty++;
+                   break;
+                }
+            }
+            localStorage.setItem('cart', JSON.stringify(newCart));
+
+            return newCart;
+        });
+    }
+
+    const handleDeleteCart = (productId) => {
+        setCart((preCart) => {
+
+            let newCart = [...preCart];
+
+            for(let i = 0; i < newCart.length; i++) {
+                if(newCart[i]._id == productId) {
+                    newCart.splice(i, 1);
+                }
+            }
+            localStorage.setItem('cart', JSON.stringify(newCart));
+
+            return newCart;
+        });
+    }
+
+    const handleDestroyCart = () => {
+        setCart([]);
+        localStorage.removeItem('cart');
+    }
+
     const checkCart = (_id) => {
         for (let i = 0; i < cart.length; i++) {
             if (cart[i]._id === _id) {
@@ -60,7 +116,7 @@ function CartProvider({ children }) {
     }
 
     return (
-        <CartContext.Provider value={{ addToCart, cart }}>
+        <CartContext.Provider value={{ addToCart, cart, handleDecrease, handleIncrease, handleDeleteCart, handleDestroyCart }}>
             {children}
             <ToastContainer />
         </CartContext.Provider>

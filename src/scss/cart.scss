@@ -12,4 +12,21 @@
             padding-top: 10px;
         }
     }
+
+    .cart-qty {
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+
+        .btn-decrease {
+            border-right: 1px solid #dee2e6;
+            border-radius: 0;
+            outline: none;
+        }
+
+        .btn-increase {
+            border-left: 1px solid #dee2e6;
+            border-radius: 0;
+            outline: none;
+        }
+    }
 }
