@@ -16,7 +16,7 @@ function Home() {
     const btnCloseModal = useRef();
 
     const getProduct = async () => {
-            await api.getListProduct()
+            await api.getListProductAdmin()
             .then((res) => {
                 setProduct(res.data.data)
             })
@@ -26,7 +26,7 @@ function Home() {
     useEffect(() => {
         getProduct();
 
-         api.getListCategories()
+         api.getListCategoriesAdmin()
             .then(async(res) => {
                 await setCategories(res.data.data);
             })
@@ -41,8 +41,8 @@ function Home() {
         }
     }, [image])
 
-    const handleSubmite = (event) => {
-        event.preventDefault();
+    const handleSubmite = (e) => {
+        e.preventDefault();
 
         const formData = new FormData();
         formData.append('name', name);
@@ -55,8 +55,11 @@ function Home() {
         api.storeProduct(formData)
             .then((res) => {
                 btnCloseModal.current.click();
+                setNameProduct('');
+                setPriceProduct('');
+                setImageProduct();
+                e.target.reset();
                 getProduct();
-                event.target.reset();
             })
             .catch(() => { })
     }

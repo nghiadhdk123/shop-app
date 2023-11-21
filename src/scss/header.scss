@@ -47,12 +47,45 @@ header {
     background-color: var(--color-1);
 
     &__categories {
+        position: relative;
         background-color: var(--color-2);
         color: white;
         font-weight: 500;
         padding: 15px;
         width: 200px;
         justify-content: center;
+
+        &:hover {
+            .list-categories {
+                visibility: visible;
+                z-index: 3;
+                top: 100%;
+                opacity: 1;
+            }
+        }
+
+        .list-categories {
+            width: 100%;
+            position: absolute;
+            top: 200%;
+            background: white;
+            box-shadow: 0 0 10px #00000020;
+            border-radius: 0 0 5px 5px;
+            visibility: hidden;
+            z-index: 0;
+            opacity: 0;
+            transition: 0.3s;
+
+            .category-item {
+                padding: 15px;
+                border-top: 1px solid var(--color-5);
+                transition: 0.5s;
+
+                &:hover {
+                    background-color: #efefef;
+                }
+            }
+        }
     }
 
     &__search {

@@ -65,8 +65,8 @@ function Home() {
                     {
                         products.length > 0 &&
                         products.map(product => (
-                            <div key={product._id} className="cols mb-3">
-                                <div className="products-item overflow-hidden">
+                            <div key={product._id} className="cols mb-3 h-auto">
+                                <div className="products-item h-100 overflow-hidden">
                                     <Link to={"/detail/" + product.slug} className="text-decoration-none text-black">
                                         <div className="products-item__image position-relative">
                                             <img src={product.image ? process.env.REACT_APP_API_URL + '/uploads/' + product.image : '/images/not-find-it.png'} alt="" className="w-100 object-fit-contain" />

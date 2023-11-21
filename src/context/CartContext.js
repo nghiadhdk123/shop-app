@@ -91,7 +91,7 @@ function CartProvider({ children }) {
             let newCart = [...preCart];
 
             for(let i = 0; i < newCart.length; i++) {
-                if(newCart[i]._id == productId) {
+                if(newCart[i]._id === productId) {
                     newCart.splice(i, 1);
                 }
             }

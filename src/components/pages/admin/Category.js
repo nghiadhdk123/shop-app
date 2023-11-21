@@ -11,7 +11,7 @@ function Category() {
     
     const getCateogy = async () => {
 
-        await api.getListCategories()
+        await api.getListCategoriesAdmin()
             .then((res) => {
                 setCategories(res.data.data);
             })
@@ -31,6 +31,7 @@ function Category() {
         api.storeCategory(formData)
         .then(() => {
             e.target.reset();
+            setNameCategory('');
             getCateogy();
             btnCloseModal.current.click();
         })

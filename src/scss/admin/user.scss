@@ -1,6 +1,6 @@
-.admin-page {
+.user-page {
 
-    .button-add-product {
+    .button-add-user {
         background-color: var(--color-4);
 
         &:hover {
@@ -36,15 +36,5 @@
                 border-top-right-radius: 5px;
             }
         }
-    }
-
-    .preview-image {
-        width: 150px;
-        height: 150px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px dashed black;
-        cursor: pointer;
     }
 }

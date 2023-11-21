@@ -1,0 +1,96 @@
+.login-page {
+
+    .login-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 100vh;
+
+        .login-backgroud {
+            background-image: url('../../../../public/images/snow-mountain-thumb.jpg');
+            width: 60%;
+            height: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+
+        .login-form {
+            width: 40%;
+            padding: 0 15px;
+
+            .form-title {
+                text-align: center;
+                font-weight: 400;
+                letter-spacing: 1px;
+                margin-bottom: 4%;
+            }
+
+            .form-wrapper {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: 0 5%;
+
+                .input-box {
+                    width: 100%;
+                    position: relative;
+                    margin-bottom: 5%;
+
+                    input {
+                        width: 100%;
+                        outline: none;
+                        padding: 10px 13px;
+                        position: relative;
+                        font-size: 14px;
+                        border: 1px solid #ced4da;
+                        border-radius: 5px;
+
+                        &:focus ~ .label-name,
+                        &:valid ~ .label-name {
+                            top: -25%;
+                            font-weight: 500;
+                        }
+                    }
+                    
+                    .label-name {
+                        font-size: 15px;
+                        position: absolute;
+                        top: 25%;
+                        left: 8px;
+                        padding: 0 5px;
+                        background-color: white;
+                        transition: 0.3s;
+                        letter-spacing: 1px;
+                    }
+                }
+
+                .button-submit {
+                    padding: 8px;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .login-wrapper {
+        flex-wrap: wrap;
+
+        .login-backgroud {
+            width: 100% !important;
+            position: fixed;
+            z-index: 0;
+        }
+
+        .login-form {
+            width: 100% !important;
+            position: relative;
+            z-index: 2;
+
+            .form-title {
+                font-weight: bold !important;
+            }
+        }
+    }
+}

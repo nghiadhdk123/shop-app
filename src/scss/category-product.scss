@@ -1,0 +1,86 @@
+.category-product-page {
+    .products {
+
+        &-title {
+            
+            &::after {
+                content: '';
+                position: absolute;
+                width: 50%;
+                border: 2px solid var(--color-1);
+                bottom: 0;
+                left: 0;
+            }
+        }
+
+        &-list {
+
+            .products-item {
+                border: 1px solid #dddddd;
+                border-radius: 5px;
+
+                &:hover {
+
+                    img {
+                        transform: scale(1.2);
+                    }
+
+                    .products-item__action {
+                        top: 51%;
+                    }
+                }
+
+                &__image {
+                    padding: 30px 20px;
+                    background-color: var(--color-3);
+
+                    img {
+                        height: 130px;
+                        max-height: 130px;
+                        transition: 0.5s;
+                    }
+
+                    .tag {
+                        top: 0;
+                        left: 0;
+                        padding: 8px 10px;
+                        background: var(--color-1);
+                        border-radius: 5px 0 5px 0;
+                        color: white;
+                        font-weight: 500;
+                        z-index: 2;
+                    }
+                }
+
+                &__info {
+                    padding: 30px 20px;
+
+                    &-price {
+                        color: var(--color-1);
+                    }
+                }
+
+                &__action {
+                    top: 150%;
+                    transition: 0.2s;
+
+                    .button-add-cart {
+                        padding: 10px 15px;
+                        background-color: var(--color-1);
+                        border: 1px solid var(--color-1);
+                        border-radius: 3px;
+                        color: white;
+                        font-weight: 500;
+                        transition: 0.5s;
+                        z-index: 2;
+
+                        &:hover {
+                            background-color: white;
+                            color: var(--color-1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
